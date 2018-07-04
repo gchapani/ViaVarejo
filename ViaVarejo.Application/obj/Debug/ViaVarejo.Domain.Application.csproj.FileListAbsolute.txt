@@ -1,0 +1,6 @@
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\bin\Debug\ViaVarejo.Domain.Application.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\bin\Debug\ViaVarejo.Domain.Application.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\obj\Debug\ViaVarejo.Domain.Application.csprojResolveAssemblyReference.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\obj\Debug\ViaVarejo.Domain.Application.csproj.CoreCompileInputs.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\obj\Debug\ViaVarejo.Domain.Application.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Domain.Application\obj\Debug\ViaVarejo.Domain.Application.pdb

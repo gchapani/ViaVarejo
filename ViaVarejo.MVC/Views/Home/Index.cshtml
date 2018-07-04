@@ -1,0 +1,278 @@
+﻿@using System.Text
+@{
+    string Token = null;
+
+    if (ViewBag.Token)
+    {
+        try
+        {
+            Token = Encoding.UTF8.GetString(Convert.FromBase64String(Request.Cookies.Get("ApiToken").Value));
+        }
+        catch (Exception)
+        {
+            Token = null;
+        }
+    }
+}
+
+@if (!ViewBag.Token)
+{
+    <div class="login-overlay">
+        <div class="login">
+            <div class="title">Login</div>
+            <div class="form-body">
+                <input type="text" id="LogUsuario" placeholder="Usuário" value="gchapani" />
+                <input type="text" id="LogSenha" placeholder="Senha" value="gchapani" />
+                <button id="login">Entrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var urlWebApi = "http://localhost:23817";
+</script>
+
+<div class="menu-esquerdo">
+    <div class="menu-esquerdo-contexto">
+        <div class="dados-amigo-header">Dados do Amigo</div>
+        <hr />
+        <div id="DadosAmigo" class="dados-amigo">
+            <b>Nome: </b><span id="NomeAmigo"></span>
+            <br />
+            <b>Endereço: </b><span id="EnderecoAmigo"></span>
+            <br />
+            <b>Localização: </b>
+            <span id="PosXAmigo" class="hidden"></span>
+            <span id="PosYAmigo" class="hidden"></span>
+        </div>
+
+        <div class="dados-amigos-proximos-header">Amigos mais próximos</div>
+        <hr />
+
+        <div class="dados-amigos-proximos" style="background-color: #ff000069;">
+            <b>Nome: </b><span id="NomeAmigoProximo1"></span>
+            <br />
+            <b>Endereço: </b><span id="EnderecoAmigoProximo1"></span>
+            <br />
+            <b>Localização: </b>
+            <span id="PosXAmigoProximo1" class="hidden"></span>
+            <span id="PosYAmigoProximo1" class="hidden"></span>
+            <br />
+            <b>Distância: </b><span id="DistanciaAmigoProximo1"></span>
+        </div>
+        <div class="dados-amigos-proximos" style="background-color: #00800061;">
+            <b>Nome: </b><span id="NomeAmigoProximo2"></span>
+            <br />
+            <b>Endereço: </b><span id="EnderecoAmigoProximo2"></span>
+            <br />
+            <b>Localização: </b>
+            <span id="PosXAmigoProximo2" class="hidden"></span>
+            <span id="PosYAmigoProximo2" class="hidden"></span>
+            <br />
+            <b>Distância: </b><span id="DistanciaAmigoProximo2"></span>
+        </div>
+        <div class="dados-amigos-proximos" style="background-color: #0000ff47;">
+            <b>Nome: </b><span id="NomeAmigoProximo3"></span>
+            <br />
+            <b>Endereço: </b><span id="EnderecoAmigoProximo3"></span>
+            <br />
+            <b>Localização: </b>
+            <span id="PosXAmigoProximo3" class="hidden"></span>
+            <span id="PosYAmigoProximo3" class="hidden"></span>
+            <br />
+            <b>Distância: </b><span id="DistanciaAmigoProximo3"></span>
+        </div>
+
+        <div class="incluir-amigo-header">Incluir Amigo</div>
+        <hr />
+        <div id="IncluirAmigo" class="incluir-amigo">
+            <input type="text" id="txtNomeAmigo" placeholder="Nome do Amigo" />
+            <br />
+            <input type="text" id="txtEnderecoAmigo" placeholder="Endereço do Amigo" />
+            <br />
+            <input type="text" id="txtPosX" placeholder="PosX" size="2" /> / <input type="text" id="txtPosY" placeholder="PosY" size="2" />
+            <br />
+            <input type="button" id="btnIncluirAmigo" value="Incluir Amigo" onclick="IncluirAmigo();" />
+        </div>
+    </div>
+</div>
+
+<div class="mapa">
+    <div id="mapa"></div>
+    <script>
+            var size = 10;
+            var x, y;
+
+            for (y = size; y >= size * (-1) ; y--) {
+                for (x = size * (-1) ; x <= size; x++) {
+                    if (y == 0 || x == 0) {
+                        $("#mapa").append("<input type='radio' id='" + x + "_" + y + "' disabled checked style='cursor:default;' />");
+                    } else {
+                        $("#mapa").append("<input type='radio' id='" + x + "_" + y + "' disabled style='cursor:default;' />");
+                    }
+                }
+                $("#mapa").append("<br />");
+            }
+    </script>
+</div>
+
+<div id="error" class="error-message"></div>
+
+@if (!ViewBag.Token)
+{
+    using (Html.BeginForm("SalvarToken", "Home", FormMethod.Post, new { id = "form-save-token" }))
+    {
+        <input type="text" name="Token" id="Token" />
+    }
+}
+
+@if (ViewBag.Token)
+{
+    <script>
+            $.ajax({
+                url: urlWebApi + '/Amigo/GetAllAmigo',
+                dataType: "json",
+                success: function (data) {
+                    $retorno = $(data.message);
+
+                    $retorno.each(function (i) {
+                        var $obj = $("#" + $retorno[i].PosX + "_" + $retorno[i].PosY);
+
+                        $obj.removeAttr("disabled");
+                        $obj.css('cursor', 'pointer');
+                        $obj.attr("checked", "checked");
+                        $obj.attr("value", this.ID);
+                        $obj.click(function () { CalcularDistancia(this) });
+                    });
+                },
+                error: function (error, a, b) {
+                    console.log(error);
+                    $('#error').html(error.status + " - " + error.responseJSON.Message);
+                },
+                beforeSend: function (xhr, configurações) {
+                    xhr.setRequestHeader('Authorization', 'Bearer @Token');
+                }
+            });
+
+            function CalcularDistancia(obj) {
+                var url = urlWebApi + '/Amigo/CalcularDistancia';
+                $.ajax({
+                    url: url,
+                    data: { idAmigoA: obj.value },
+                    dataType: "json",
+                    success: function (data) {
+                        if (!data.status) {
+                            $('#error').html(data.message);
+                        } else {
+                            $retorno = $(data.message);
+
+                            $('input[type=radio]').css('box-shadow', 'none');
+
+                            $retorno.each(function (i) {
+                                var cor = '';
+                                switch (i) {
+                                    case 1: cor = 'red'; break;
+                                    case 2: cor = 'green'; break;
+                                    case 3: cor = 'blue'; break;
+                                }
+
+                                if (i == 0) {
+                                    $('#NomeAmigo').html(this.Nome);
+                                    $('#EnderecoAmigo').html(this.Endereco);
+                                    $('#PosXAmigo').html(this.PosX + "<b>x |</b>").show();
+                                    $('#PosYAmigo').html(this.PosY + "<b>y</b>").show();
+
+                                    $('#' + this.PosX + '_' + this.PosY).css('box-shadow', '0 0 5px black');
+                                } else {
+                                    $('#NomeAmigoProximo' + i).html(this.Nome);
+                                    $('#EnderecoAmigoProximo' + i).html(this.Endereco);
+                                    $('#PosXAmigoProximo' + i).html(this.PosX + "<b>x |</b>").show();
+                                    $('#PosYAmigoProximo' + i).html(this.PosY + "<b>y</b>").show();
+                                    $('#DistanciaAmigoProximo' + i).html(this.Distancia.toFixed(2));
+
+                                    $('#' + this.PosX + '_' + this.PosY).css('box-shadow', '0 0 30px ' + cor);
+                                }
+
+                                if (i == 3) return false;
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        $('#error').html(error.status + " - " + error.responseJSON.Message);
+                    },
+                    beforeSend: function (xhr, configurações) {
+                        xhr.setRequestHeader('Authorization', 'Bearer @Token');
+                    }
+                });
+            }
+
+            function IncluirAmigo() {
+                if ($("#txtNomeAmigo").val() == "" || $("#txtNomeAmigo").val() == null) {
+                    $('#error').html("Informe o nome do amigo");
+                } else if ($("#txtEnderecoAmigo").val() == "" || $("#txtEnderecoAmigo").val() == null) {
+                    $('#error').html("Informe o endereço do amigo");
+                } else if ($("#txtPosX").val() == "" || $("#txtPosX").val() == null || !$.isNumeric($("#txtPosX").val()) ||
+                           $("#txtPosY").val() == "" || $("#txtPosY").val() == null || !$.isNumeric($("#txtPosY").val())) {
+                    $('#error').html("Informe a localização do amigo. Usar apenas número inteiro.");
+                } else {
+                    $.ajax({
+                        url: urlWebApi + '/Amigo/AddAmigo',
+                        dataType: "json",
+                        data: {
+                            Nome: $("#txtNomeAmigo").val(),
+                            Endereco: $("#txtEnderecoAmigo").val(),
+                            PosX: $("#txtPosX").val(),
+                            PosY: $("#txtPosY").val()
+                        },
+                        success: function (data) {
+                            if (!data.status) {
+                                $('#error').html(data.message);
+                            } else {
+                                location.reload();
+                            }
+                        },
+                        error: function (error) {
+                            $('#error').html(error.status + " - " + error.responseJSON.Message);
+                        },
+                        beforeSend: function (xhr, configuracoes) {
+                            xhr.setRequestHeader('Authorization', 'Bearer @Token');
+                        }
+                    });
+                }
+            }
+    </script>
+}
+else
+{
+    <script>
+            $('#login').on('click', function () {
+                var user = $('#LogUsuario').val();
+                var senha = $('#LogSenha').val();
+
+                $.ajax({
+                    url: urlWebApi + '/Token',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        grant_type: 'password',
+                        username: user,
+                        password: senha
+                    },
+                    success: function (result) {
+                        debugger;
+                        console.log(result.access_token);
+
+                        $('#Token').val(result.access_token);
+                        $('#form-save-token').submit();
+                    },
+                    error: function (result) {
+                        debugger;
+                        console.log(result);
+                        $('#error').html(result.status + " - " + result.statusText);
+                    }
+                });
+            });
+    </script>
+}

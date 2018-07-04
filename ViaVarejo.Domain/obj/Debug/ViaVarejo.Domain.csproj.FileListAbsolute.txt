@@ -1,0 +1,5 @@
+C:\Projetos\ViaVarejo\ViaVarejo.Domain\bin\Debug\ViaVarejo.Domain.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Domain\bin\Debug\ViaVarejo.Domain.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Domain\obj\Debug\ViaVarejo.Domain.csproj.CoreCompileInputs.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Domain\obj\Debug\ViaVarejo.Domain.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Domain\obj\Debug\ViaVarejo.Domain.pdb

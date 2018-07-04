@@ -1,0 +1,14 @@
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\ViaVarejo.Infra.Data.dll.config
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\ViaVarejo.Infra.Data.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\ViaVarejo.Infra.Data.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\EntityFramework.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\ViaVarejo.Domain.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\ViaVarejo.Domain.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\EntityFramework.xml
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\obj\Debug\ViaVarejo.Infra.Data.csprojResolveAssemblyReference.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\obj\Debug\ViaVarejo.Infra.Data.csproj.CoreCompileInputs.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\obj\Debug\ViaVarejo.Infra.Data.csproj.CopyComplete
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\obj\Debug\ViaVarejo.Infra.Data.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Infra.Data\obj\Debug\ViaVarejo.Infra.Data.pdb

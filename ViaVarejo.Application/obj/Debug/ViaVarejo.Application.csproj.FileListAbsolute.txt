@@ -1,0 +1,8 @@
+C:\Projetos\ViaVarejo\ViaVarejo.Application\bin\Debug\ViaVarejo.Application.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Application\bin\Debug\ViaVarejo.Application.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Application\bin\Debug\ViaVarejo.Domain.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Application\bin\Debug\ViaVarejo.Domain.pdb
+C:\Projetos\ViaVarejo\ViaVarejo.Application\obj\Debug\ViaVarejo.Application.csproj.CoreCompileInputs.cache
+C:\Projetos\ViaVarejo\ViaVarejo.Application\obj\Debug\ViaVarejo.Application.csproj.CopyComplete
+C:\Projetos\ViaVarejo\ViaVarejo.Application\obj\Debug\ViaVarejo.Application.dll
+C:\Projetos\ViaVarejo\ViaVarejo.Application\obj\Debug\ViaVarejo.Application.pdb

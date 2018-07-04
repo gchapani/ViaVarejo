@@ -1,0 +1,156 @@
+﻿.login-overlay {
+    padding-top: 30px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: Arial;
+}
+
+.login, .cadastro {
+    width: 400px;
+    background: #fff;
+    color: #222;
+    display: inline-block;
+}
+
+.title {
+    width: 100%;
+    height: 40px;
+    background: #222;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+
+.form-body {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    box-sizing: border-box;
+    display: block;
+}
+
+    .form-body input {
+        width: 100%;
+        height: 30px;
+        display: block;
+        box-sizing: border-box;
+    }
+
+        .form-body input + input {
+            margin-top: 5px;
+        }
+
+    .form-body button {
+        margin-top: 5px;
+        width: 100%;
+        display: block;
+        height: 30px;
+        background: #222;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+.menu-esquerdo {
+    float: left;
+    width: 20%;
+    height: 100%;
+    border-color: dimgrey;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.menu-esquerdo-contexto {
+    padding: 0 15px;
+    text-align: center;
+    height: 50%;
+    font-family: Arial;
+}
+
+.dados-amigo-header {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dados-amigo {
+    text-align: left;
+    font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.dados-amigos-proximos-header {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dados-amigos-proximos {
+    text-align: left;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.incluir-amigo-header {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.incluir-amigo {
+    text-align: left;
+    font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+    .incluir-amigo input {
+        margin-top: 5px;
+    }
+
+    .incluir-amigo input[type=button] {
+        margin-top: 15px;
+    }
+
+.mapa {
+    float: right;
+    width: 79.7%;
+    height: 90%;
+    border-color: dimgrey;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+}
+
+.error-message {
+    font-family: Arial;
+    font-size: 14px;
+    color: red;
+    float: right;
+    width: 79.7%;
+    height: 9.9%;
+    border-color: dimgrey;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+}
+
+input[type=radio] {
+    margin: 5px;
+}
+
+.hidden {
+    display : none;
+}
