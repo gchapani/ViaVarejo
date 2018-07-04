@@ -1,0 +1,40 @@
+-- CREATE TABLE
+CREATE TABLE [dbo].[Amigo] (
+    [ID] [int] NOT NULL IDENTITY,
+    [Nome] [varchar](100) NOT NULL,
+    [Endereco] [varchar](100) NOT NULL,
+    [PosX] [decimal](18, 2) NOT NULL,
+    [PosY] [decimal](18, 2) NOT NULL,
+    [Distancia] [decimal](18, 2),
+    CONSTRAINT [PK_dbo.Amigo] PRIMARY KEY ([ID])
+)
+
+CREATE TABLE [dbo].[CalculoHistoricoLog] (
+    [ID] [int] NOT NULL IDENTITY,
+    [IDAmigoA] [int] NOT NULL,
+    [IDAmigoB] [int] NOT NULL,
+    [DistanciaAB] [decimal](18, 2) NOT NULL,
+    [DataInclusao] [datetime] NOT NULL,
+    CONSTRAINT [PK_dbo.CalculoHistoricoLog] PRIMARY KEY ([ID])
+)
+
+CREATE UNIQUE INDEX [IX_PosX_PosY] ON [dbo].[Amigo]([PosX], [PosY])
+CREATE INDEX [IX_IDAmigoA] ON [dbo].[CalculoHistoricoLog]([IDAmigoA])
+CREATE INDEX [IX_IDAmigoB] ON [dbo].[CalculoHistoricoLog]([IDAmigoB])
+ALTER TABLE [dbo].[CalculoHistoricoLog] ADD CONSTRAINT [FK_dbo.CalculoHistoricoLog_dbo.Amigo_IDAmigoA] FOREIGN KEY ([IDAmigoA]) REFERENCES [dbo].[Amigo] ([ID])
+ALTER TABLE [dbo].[CalculoHistoricoLog] ADD CONSTRAINT [FK_dbo.CalculoHistoricoLog_dbo.Amigo_IDAmigoB] FOREIGN KEY ([IDAmigoB]) REFERENCES [dbo].[Amigo] ([ID])
+
+-- INSERTS
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Gleison Chapani', '5662 Tranquility Oaks Drive, 102', 5, 9);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('João da Silva', 'Avenida Paulista, 1500', 9, -7);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Vagner Santos', 'Rua Olavo de Carvalho, 43', -8, -3);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('André Luiz', 'Rua Domingo de Moraes, 2076', -1, -10);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Marcelo Soares', 'Avenida Faria Lima, 1024, cj 308', -8, 4);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Humberto Pereira', 'Avenida Francisco Mattarazzo', -2, -6);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Beatriz Chapani', 'Avenida Angélica, 106', 7, 6);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Everton Chapani', 'Rua Barro Duro, 56', 8, -2);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Lilian Chapani', 'Rua Mazagão, 204', -8, 1);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Vera Lúcia', 'Avenida Pompéia, 1500', 3, -4);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Edvaldo José', 'Rua Fernandes Sardinha, 207 - apto 15', 2, 3);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Manu Dias', 'Rua Nossa Senhora do Bom Conselho. 1002', 18, -15);
+INSERT INTO Amigo (Nome, Endereco, PosX, PosY) VALUES ('Luis Felipe', 'Avenida Itaquera, 2500', -13, 14);
